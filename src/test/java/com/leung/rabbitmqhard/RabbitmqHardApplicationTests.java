@@ -1,5 +1,6 @@
 package com.leung.rabbitmqhard;
 
+import com.leung.rabbitmqhard.middleware.rabbitmq.publisher.RabbitMQUtil;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -17,22 +18,11 @@ import static com.leung.rabbitmqhard.middleware.rabbitmq.config.RabbitmqConfig.S
 public class RabbitmqHardApplicationTests {
 
     @Resource
-    private RabbitTemplate rabbitTemplate;
+    private RabbitMQUtil rabbitMQUtil;
 
     @Test
-    @Disabled
     public void testMQ() {
-
-        // 创建消息体
-        byte[] body = "Hello World".getBytes();
-
-        // 构建 Message
-        Message message = MessageBuilder.withBody(body)
-                .build();
-        // 创建带ID的CorrelationData
-        CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
-
-        rabbitTemplate.send(SIMPLE_ROUTING_KEY, message, correlationData);
+        rabbitMQUtil.sendMsg("hello world");
     }
 
 }

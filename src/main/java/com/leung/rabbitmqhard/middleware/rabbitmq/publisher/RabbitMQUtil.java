@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.UUID;
 
-import static io.lettuce.core.pubsub.PubSubOutput.Type.message;
-
 @Component
 public class RabbitMQUtil {
 
@@ -31,7 +29,7 @@ public class RabbitMQUtil {
         messageProperties.setContentType(MessageProperties.CONTENT_TYPE_JSON);
 
         // 创建消息对象
-        Message msg = new Message(JSON.toJSONString(message).getBytes(), messageProperties);
+        Message msg = new Message(JSON.toJSONString(object).getBytes(), messageProperties);
 
         // 发送消息
         rabbitTemplate.send(msg);

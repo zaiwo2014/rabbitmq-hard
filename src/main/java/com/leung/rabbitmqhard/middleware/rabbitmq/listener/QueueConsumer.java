@@ -63,6 +63,7 @@ public class QueueConsumer {
                     // 标记消息已处理
                     redissonUtil.set(processedKey, "1", 7, TimeUnit.DAYS);
 
+
                     // 确认消息
                     channel.basicAck(deliveryTag, false);
                     log.info("消息处理完成并确认: {}", messageId);
