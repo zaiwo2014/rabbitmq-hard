@@ -1,7 +1,10 @@
 package com.leung.rabbitmqhard.middleware.rabbitmq.config;
 
 
+import com.leung.rabbitmqhard.middleware.rabbitmq.util.RedissonUtil;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RedissonClient;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -32,6 +35,9 @@ public class RabbitmqConfig {
 
     @Value("${rabbitmq.virtual-host:/}")
     private String virtualHost;
+
+    @Resource
+    private RedissonUtil redissonUtil;
 
 
 
